@@ -1,0 +1,52 @@
+<!--{widget}-->
+<div class="aw-news summary">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title pull-left">
+                <a href="#" data-url="ws">Новости</a>
+            </h3>
+
+            <div id="{i#managerButtons}" class="pull-right btn-group hide">
+                <a data-url="news.create" href="#" class="btn btn-default btn-xs"                   >
+                    Добавить
+                </a>
+                <a data-url="manager.view" href="#" class="btn btn-default btn-xs">
+                    Управление
+                </a>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <div class="text-center" data-wait="show">
+                <img src="/images/loading.gif"/>
+
+                <p>Идет загрузка данных</p>
+
+                <p>Пожалуйста, подождите...</p>
+            </div>
+            <div id="{i#list}"></div>
+        </div>
+    </div>
+</div>
+
+<!--{table}-->
+<div class="list-group">
+    {v#rows}
+
+    <li class="list-group-item text-right">
+        <a href="/news/">Все новости</a>
+    </li>
+</div>
+
+<!--{row}-->
+<li class="list-group-item">
+    <span><i>{v#published}</i></span>
+    &nbsp;
+    <a href="/news/{v#id}/" target="_blank" title="Просмотреть новость">
+        <span>{v#title}</span>
+    </a>
+</li>
+
+<!--{notPublish}-->
+не опубликовано

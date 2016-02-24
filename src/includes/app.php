@@ -12,7 +12,7 @@
  *
  * @property NewsManager $manager
  */
-class News extends AbricosApplication {
+class NewsApp extends AbricosApplication {
 
     protected function GetClasses(){
         return array(
@@ -65,6 +65,14 @@ class News extends AbricosApplication {
      * @return NewsList
      */
     public function NewsList($page, $limit = 20){
+        if (is_object($page)){
+            $options = $page;
+            $page = isset($options->page) ? intval($options->page) : 1;
+            $limit = isset($options->limit) ? intval($options->limit) : 20;
+        }
+
+        $limit = min(max($limit, 1), 50);
+
         $key = $page."_".$limit;
         if (!isset($this->_cache['NewsList'])){
             $this->_cache['NewsList'] = array();
@@ -74,7 +82,7 @@ class News extends AbricosApplication {
         }
 
         if (!$this->manager->IsViewRole()){
-            return 403;
+            return AbricosResponse::ERR_FORBIDDEN;
         }
 
         /** @var NewsList $list */
@@ -95,7 +103,7 @@ class News extends AbricosApplication {
 
     public function NewsCount(){
         if (!$this->manager->IsViewRole()){
-            return 403;
+            return AbricosResponse::ERR_FORBIDDEN;
         }
 
         $ret = new stdClass();
@@ -120,7 +128,7 @@ class News extends AbricosApplication {
             return $this->_cache['NewsItem'][$newsid];
         }
         if (!$this->manager->IsViewRole()){
-            return 403;
+            return AbricosResponse::ERR_FORBIDDEN;
         }
 
         $d = NewsQuery::NewsItem($this->db, $newsid);
@@ -140,7 +148,7 @@ class News extends AbricosApplication {
 
     public function NewsSave($d){
         if (!$this->manager->IsAdminRole()){
-            return 403;
+            return AbricosResponse::ERR_FORBIDDEN;
         }
         $d->id = intval($d->id);
 
@@ -177,7 +185,7 @@ class News extends AbricosApplication {
 
     public function NewsPublish($newsid){
         if (!$this->manager->IsAdminRole()){
-            return 403;
+            return AbricosResponse::ERR_FORBIDDEN;
         }
         $news = $this->NewsItem($newsid);
         if (empty($news)){
@@ -200,7 +208,7 @@ class News extends AbricosApplication {
 
     public function NewsRemove($newsid){
         if (!$this->manager->IsAdminRole()){
-            return 403;
+            return AbricosResponse::ERR_FORBIDDEN;
         }
         $news = $this->NewsItem($newsid);
         if (empty($news)){
@@ -227,7 +235,7 @@ class News extends AbricosApplication {
         }
 
         if (!$this->manager->IsViewRole()){
-            return 403;
+            return AbricosResponse::ERR_FORBIDDEN;
         }
 
         $phrases = NewsModule::$instance->GetPhrases();
@@ -255,7 +263,7 @@ class News extends AbricosApplication {
 
     public function ConfigSave($sd){
         if (!$this->manager->IsAdminRole()){
-            return 403;
+            return AbricosResponse::ERR_FORBIDDEN;
         }
 
         $phs = NewsModule::$instance->GetPhrases();

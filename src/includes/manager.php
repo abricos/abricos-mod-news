@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Abricos
  * @subpackage News
@@ -6,24 +7,13 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  * @author Alexander Kuzmin <roosit@abricos.org>
  */
-
 class NewsManager extends Ab_ModuleManager {
 
     /**
      * @var NewsManager
+     * @deprecated
      */
-    public static $instance;
-
-    /**
-     *
-     * @var NewsModule
-     */
-    public $module = null;
-
-    public function __construct(NewsModule $module){
-        parent::__construct($module);
-        NewsManager::$instance = $this;
-    }
+    private static $instance;
 
     /**
      * Роль администратора новостей: редактор всех новостей
@@ -52,23 +42,25 @@ class NewsManager extends Ab_ModuleManager {
         return $this->IsRoleEnable(NewsAction::VIEW);
     }
 
-    private $_news = null;
+    private $_app = null;
 
     /**
-     * @return News
+     * @return NewsApp
      */
-    public function GetNews() {
-        if (empty($this->_news)) {
-            require_once 'classes/models.php';
-            require_once 'dbquery.php';
-            require_once 'classes/news.php';
-            $this->_news = new News($this);
+    public function GetApp(){
+        if (empty($this->_app)){
+            $this->module->ScriptRequireOnce(array(
+                'includes/models.php',
+                'includes/dbquery.php',
+                'includes/app.php'
+            ));
+            $this->_app = new NewsApp($this);
         }
-        return $this->_news;
+        return $this->_app;
     }
 
-    public function AJAX($d) {
-        return $this->GetNews()->AJAX($d);
+    public function AJAX($d){
+        return $this->GetApp()->AJAX($d);
     }
 
     public function Bos_MenuData(){
@@ -83,6 +75,22 @@ class NewsManager extends Ab_ModuleManager {
                 "icon" => "/modules/news/images/cp_icon.gif",
                 "url" => "news/wspace/ws",
                 "parent" => "controlPanel"
+            )
+        );
+    }
+
+    public function Bos_SummaryData(){
+        if (!$this->IsViewRole()){
+            return;
+        }
+
+        $i18n = $this->module->I18n();
+        return array(
+            array(
+                "module" => "news",
+                "component" => "summary",
+                "widget" => "SummaryWidget",
+                "title" => $i18n->Translate("title")
             )
         );
     }

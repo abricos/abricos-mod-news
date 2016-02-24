@@ -13,7 +13,7 @@ $v = &$brick->param->var;
 
 /** @var NewsModule $mod */
 $mod = Abricos::GetModule('news');
-$app = $mod->GetManager()->GetNews();
+$app = $mod->GetManager()->GetApp();
 $config = $app->Config();
 
 $newsid = intval(Abricos::$adress->dir[1]);

@@ -82,6 +82,10 @@ class NewsModule extends Ab_Module {
         return true;
     }
 
+    public function Bos_IsSummary(){
+        return true;
+    }
+
 }
 
 
