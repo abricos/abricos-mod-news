@@ -50,12 +50,6 @@ class NewsApp extends AbricosApplication {
         return null;
     }
 
-    protected $_cache = array();
-
-    public function CacheClear(){
-        $this->_cache = array();
-    }
-
     public function NewsListToJSON($page){
         $res = $this->NewsList($page);
         return $this->ResultToJSON('newsList', $res);

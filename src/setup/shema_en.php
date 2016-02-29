@@ -26,7 +26,8 @@ if ($updateManager->isInstall()){
 
     $oldUID = Abricos::$user->id;
     Abricos::$user->id = 1;
-    $updateManager->module->GetManager()->GetNews();
+    /** @var NewsApp $app */
+    $app = Abricos::GetApp('news');
     NewsQuery::NewsAppend(Abricos::$db, $d);
     Abricos::$user->id = $oldUID;
 }

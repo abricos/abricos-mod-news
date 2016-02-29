@@ -42,23 +42,6 @@ class NewsManager extends Ab_ModuleManager {
         return $this->IsRoleEnable(NewsAction::VIEW);
     }
 
-    private $_app = null;
-
-    /**
-     * @return NewsApp
-     */
-    public function GetApp(){
-        if (empty($this->_app)){
-            $this->module->ScriptRequireOnce(array(
-                'includes/models.php',
-                'includes/dbquery.php',
-                'includes/app.php'
-            ));
-            $this->_app = new NewsApp($this);
-        }
-        return $this->_app;
-    }
-
     public function AJAX($d){
         return $this->GetApp()->AJAX($d);
     }
