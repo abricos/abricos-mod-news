@@ -13,8 +13,14 @@ $v = &$brick->param->var;
 
 /** @var NewsModule $mod */
 $mod = Abricos::GetModule('news');
+/** @var NewsApp $app */
 $app = $mod->GetManager()->GetApp();
 $config = $app->Config();
+
+if (AbricosResponse::IsError($config)){
+    $brick->content = "";
+    return;
+}
 
 $limit = $p['count'];
 $hideintro = $p['hideintro'];
