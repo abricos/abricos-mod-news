@@ -68,6 +68,3 @@ if (empty($title)){
 if (!empty($title)){
     Brick::$builder->SetGlobalVar('meta_title', $title);
 }
-
-
-?>

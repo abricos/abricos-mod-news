@@ -119,5 +119,3 @@ class NewsPermission extends Ab_UserPermission {
 }
 
 Abricos::ModuleRegister(new NewsModule());
-
-?>

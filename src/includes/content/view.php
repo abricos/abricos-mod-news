@@ -36,5 +36,3 @@ $v['image'] = '';
 if (!empty($newsItem->title)){
     Brick::$builder->SetGlobalVar('meta_title', $newsItem->title);
 }
-
-?>

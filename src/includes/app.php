@@ -267,7 +267,4 @@ class NewsApp extends AbricosApplication {
 
         Abricos::$phrases->Save();
     }
-
 }
-
-?>

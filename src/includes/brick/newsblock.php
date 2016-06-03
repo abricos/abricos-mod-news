@@ -25,6 +25,3 @@ if (!empty($modRSS)){
 $brick->content = Brick::ReplaceVarByData($brick->content, array(
     'rss' => $rss
 ));
-
-
-?>

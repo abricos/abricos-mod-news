@@ -31,5 +31,3 @@ if ($updateManager->isInstall()){
     NewsQuery::NewsAppend(Abricos::$db, $d);
     Abricos::$user->id = $oldUID;
 }
-
-?>

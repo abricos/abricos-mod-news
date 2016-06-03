@@ -133,7 +133,4 @@ class NewsQuery {
 		";
         $db->query_write($sql);
     }
-
 }
-
-?>

@@ -41,5 +41,3 @@ for ($i = 0; $i < $count; $i++){
 
 $brick->viewcount = $count;
 $brick->param->var['result'] = $lst;
-
-?>

@@ -94,6 +94,3 @@ if ($updateManager->isUpdate('0.2.8') && !$updateManager->isInstall()){
 
     $db->query_write("DROP TABLE IF EXISTS ".$pfx."ns_news");
 }
-
-
-?>

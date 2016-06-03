@@ -53,5 +53,3 @@ class NewsConfig extends AbricosModel {
     protected $_structModule = 'news';
     protected $_structName = 'Config';
 }
-
-?>
