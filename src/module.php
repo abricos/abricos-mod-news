@@ -20,7 +20,7 @@ class NewsModule extends Ab_Module {
 
     private $_manager = null;
 
-    public function NewsModule(){
+    public function __construct(){
         NewsModule::$instance = $this;
 
         $this->version = "0.2.8";
